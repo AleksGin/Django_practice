@@ -33,7 +33,7 @@ class DogSerializer(ModelSerializer):
 
 class BreedSerializer(ModelSerializer):
     dogs_breed_count = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Breed
         fields = "__all__"
-        
