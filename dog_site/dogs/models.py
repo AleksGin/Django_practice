@@ -7,7 +7,7 @@ from django.db import models
 
 class Dog(models.Model):
     name = models.CharField(max_length=255)
-    age = models.IntegerField(max_length=2)
+    age = models.IntegerField()
     breed = models.ForeignKey(
         "Breed",
         on_delete=models.PROTECT,
