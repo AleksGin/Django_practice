@@ -6,6 +6,18 @@ from django.db import models
 
 
 class Dog(models.Model):
+    """Модель для представления собаки в базе данных.
+
+    Attributes:
+        name (CharField): Имя собаки.
+        age (IntegerField): Возраст собаки.
+        breed (ForeignKey): Связь с породой собаки.
+        gender (CharField): Пол собаки.
+        color (CharField): Цвет собаки.
+        favorite_food (CharField): Любимая еда собаки.
+        favorite_toy (CharField): Любимая игрушка собаки.
+    """
+
     name = models.CharField(max_length=255)
     age = models.IntegerField()
     breed = models.ForeignKey(
@@ -19,10 +31,25 @@ class Dog(models.Model):
     favorite_toy = models.CharField(max_length=50)
 
     def __str__(self) -> str:
+        """Возвращает строковое представление объекта Dog.
+
+        Returns:
+            str: Имя собаки.
+        """
         return self.name
 
 
 class Breed(models.Model):
+    """Модель для представления породы собак в базе данных.
+
+    Attributes:
+        name (CharField): Название породы.
+        size (CharField): Размер породы (Tiny, Small, Medium, Large).
+        friendliness (IntegerField): Уровень дружелюбия (1-5).
+        trainability (IntegerField): Уровень обучаемости (1-5).
+        shedding_amount (IntegerField): Уровень линьки (1-5).
+        exercise_needs (IntegerField): Уровень потребности в упражнениях (1-5).
+    """
     name = models.CharField(max_length=40)
 
     SIZE_CHOISES = [
@@ -47,4 +74,9 @@ class Breed(models.Model):
     )
 
     def __str__(self) -> str:
+        """Возвращает строковое представление объекта Breed.
+
+        Returns:
+            str: Название породы.
+        """
         return self.name
