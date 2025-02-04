@@ -1,18 +1,18 @@
-"""
-URL configuration for dog_site project.
+"""Конфигурация URL для проекта.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+Настраивает маршруты для административной панели Django и API, реализованного через Django REST Framework.
+Используется SimpleRouter для автоматической генерации маршрутов для ViewSet-ов.
+
+Доступные URL:
+  - /admin/ — административная панель Django.
+  - /api/dogs/ — CRUD-операции для модели Dog через DogViewSet.
+  - /api/breeds/ — CRUD-операции для модели Breed через BreedViewSet.
+
+Пример использования:
+  Если сервер запущен на localhost и порт 8000, то:
+    - Админка доступна по http://localhost:8000/admin/
+    - API для собак доступно по http://localhost:8000/api/dogs/
+    - API для пород доступно по http://localhost:8000/api/breeds/
 """
 
 from django.contrib import admin
