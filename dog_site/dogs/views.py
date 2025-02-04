@@ -13,6 +13,23 @@ from .serializers import (
 
 
 class DogViewSet(ModelViewSet):
+    """ViewSet для работы с объектами модели Dog.
+
+    Этот ViewSet предоставляет CRUD-интерфейс для модели Dog. В наборе выборки (queryset)
+    добавляются два аннотированных поля:
+      - breed_avg_age: округлённое до одного знака после запятой среднее значение возраста собак
+        той же породы. Если данные отсутствуют, используется значение 0.0.
+      - same_breed_count: количество собак, относящихся к той же породе, с учётом уникальности.
+
+    Атрибуты:
+        queryset (QuerySet): Набор объектов Dog, аннотированных дополнительными полями.
+        serializer_class (Serializer): Класс сериализатора, используемый для представления объектов Dog.
+
+    Исключения:
+        Может возникать django.db.utils.OperationalError, если база данных недоступна или
+        настройки подключения неверны.
+    """
+
     queryset = Dog.objects.annotate(
         breed_avg_age=Round(
             Coalesce(
@@ -36,6 +53,20 @@ class DogViewSet(ModelViewSet):
 
 
 class BreedViewSet(ModelViewSet):
+    """ViewSet для работы с объектами модели Breed.
+
+    Этот ViewSet предоставляет CRUD-интерфейс для модели Breed. В наборе выборки (queryset)
+    для каждого объекта породы добавляется аннотированное поле:
+      - dogs_breed_count: количество собак, связанных с данной породой (без повторов).
+
+    Атрибуты:
+        queryset (QuerySet): Набор объектов Breed, аннотированных полем dogs_breed_count.
+        serializer_class (Serializer): Класс сериализатора, используемый для представления объектов Breed.
+
+    Исключения:
+        Может возникать django.db.utils.OperationalError, если при обращении к базе данных
+        произошла ошибка подключения или настройки миграций не прошли корректно.
+    """
     queryset = Breed.objects.annotate(
         dogs_breed_count=Count(
             "dogs",
